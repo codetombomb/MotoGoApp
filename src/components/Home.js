@@ -4,6 +4,7 @@ import axios from "axios";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 import TopNav from './TopNav'
+import BikeSearchButton from './BikeSearchButton'
 import HomeImg from '../style/images/home.jpg'
 
 export default class Home extends Component {
@@ -40,7 +41,7 @@ export default class Home extends Component {
                 {this.setBackground()}
                 <TopNav />
                <h1 id="moto">moto<mark className='green'>GO</mark></h1>
-               {/* <BikeSearchButton /> */}
+               <BikeSearchButton />
                 {/* <h1>Status: {this.props.loggedInStatus}</h1> */}
                 {/* <button onClick={() => this.handleLogoutClick()}>Logout</button> */}
                 {/* <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} /> */}
