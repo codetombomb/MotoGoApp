@@ -8,12 +8,40 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
-    font-family: 'montserrat';
+    font-family: 'play';
+}
+
+//styling for MotGo name on home screen
+#moto {
+    margin-left: 125px;
+    margin-top: 75px;
+    font-size: 100px;
+    color: white;
+}
+
+#navbar-logo {
+    height: 40px;
+}
+
+mark.green {
+    color: greenyellow;
+    background: none;
+    opacity: 0.5;
+    font-size: 125px;
+    
+}
+.top-nav {
+    margin-top: -23px;
+    background-color: rgba($color: #000000, $alpha: 0.7);
 }
 
 body {
     overflow-x: hidden;
     font-weight: normal;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -24,5 +52,5 @@ body {
 .app {
     margin-top: 2rem;
     display: grid;
-    justify-items: center;
+    // justify-items: center;
 }
