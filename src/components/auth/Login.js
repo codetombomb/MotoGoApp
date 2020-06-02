@@ -11,6 +11,7 @@ export default class Login extends Component {
       loginErrors: ""
     };
 
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -46,29 +47,33 @@ export default class Login extends Component {
     event.preventDefault();
   }
 
+
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <div >
+        <form onSubmit={this.handleSubmit} className="login-form">
           <input
+            className="login-input"
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="    Email"
             value={this.state.email}
             onChange={this.handleChange}
             required
           />
-
+          <br/>
+          <br/>
           <input
+            className="login-input"
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="    Password"
             value={this.state.password}
             onChange={this.handleChange}
             required
           />
-
-          <button type="submit">Login</button>
+          <br/>
+          <button className="login-submit" type="submit">Login</button>
         </form>
       </div>
     );

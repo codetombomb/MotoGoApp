@@ -1,59 +1,86 @@
 import React, { Component } from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Image from 'react-bootstrap/Image'
-import { Brand, Nav, Form, FormControl, Button, Col } from 'react-bootstrap'
-import Logo from '../style/images/moto-logo.png'
+import { Navlink, Link, Redirect, Route } from 'react-router-dom'
+import MotoLogo from '../style/images/moto-logo.png'
 import axios from 'axios'
+
+
+
 
 class TopNav extends Component {
     constructor(props){
-        super(props);
-
-        this.state = {
-            user: null
-        }
-        this.handleLogoutClick = this.handleLogoutClick.bind(this);
-
+        super(props)
+     
     }
 
-    componentDidMount(){
-        this.setState({user: this.props.currentUser})
-        console.log(this.state.user)
-    }
-
-  handleLogoutClick() {
-    axios
+    handleLogoutClick(){
+        axios
         .delete("http://localhost:3001/logout", { withCredentials: true })
         .then(response => {
-            () => this.props.handleLogout;
+          this.props.handleLogout();
+          this.props.history.push("/");
         })
         .catch(error => {
-            console.log("logout error", error);
+          console.log("logout error", error);
         });
-}
+    }
+
 
 
     render() {
         return (
             <div>
-                <Navbar variant="dark" className="topnav">
-                    <Navbar.Brand href="/"><img src={Logo} id="navbar-logo"></img></Navbar.Brand>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search Cites" className="mr-sm-2" id="searchBar"/>
-                        <Button variant="outline-info">Search</Button>
-                    </Form>
-                    <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        {this.state.user === null ? 
-                        <Nav.Link href="/login">Login</Nav.Link> : <Nav.Link onClick={this.handleLogoutClick()}>Logout</Nav.Link> }                        
-                        <Nav.Link href="/sign-up">Sign Up</Nav.Link>
-                    </Nav>
-                    <Col xs={6} md={4}>
-                        <Image src="holder.js/171x180" rounded />
-                    </Col>
-                </Navbar>
+                <header>
+                    <div className="container">
+                        <img className="navbar-logo" alt="logo" src={MotoLogo} />
+                        <div>
+                        {this.props.currentUser ? <h1>Current User: {this.props.currentUser.first_name}</h1> : <h1>No one logged in</h1> }
+                        </div>
+
+                        <nav>
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="/find-a-bike">Find A Bike</a></li>
+                                <li><a href="/sign-up">Sign Up</a></li>
+                                <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+
             </div>
         )
+
     }
 }
 export default TopNav;
+
+
+
+
+
+                            // {this.props.loggedInStatus === "LOGGED_IN" ? (
+                            //     <Navbar className="topnav" bg="dark" variant="dark">
+                            //     <Navbar.Brand className="navbar-logo" href="/"><img src={MotoLogo} /></Navbar.Brand>
+                            //     <Nav className="mr-auto">
+                            //         <Nav.Link href="/">Home</Nav.Link>
+                            //         {/* <Nav.Link href="/sign-up">Sign Up</Nav.Link> */}
+                            //         <Nav.Link onClick={this.props.handleLogout}>Logout</Nav.Link>
+                            //         <Avatar src={this.props.currentUser.avatar_url} />
+                            //     </Nav>
+                            //     <h1 style={{ color: "white" }}>{this.props.loggedInStatus} AS: {this.props.currentUser.first_name} {this.props.currentUser.last_name}</h1>                  
+
+                            // </Navbar>
+                            // ) : (
+                            //     <Navbar className="topnav" bg="dark" variant="dark">
+                            //     <Navbar.Brand className="navbar-logo" href="/"><img src={MotoLogo} /></Navbar.Brand>
+                            //     <Nav className="mr-auto">
+                            //         <Nav.Link href="/">Home</Nav.Link>
+                            //         <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                            //         {/* <Nav.Link onClick={this.props.handleLogout}>Logout</Nav.Link> */}
+                            //         <Avatar src="d" />
+                            //     </Nav>
+                            //     <h1 style={{ color: "white" }}>{this.props.loggedInStatus}</h1>
+
+                            // </Navbar>
+                            // )}

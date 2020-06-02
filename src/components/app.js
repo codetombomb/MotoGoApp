@@ -4,7 +4,10 @@ import axios from "axios";
 
 import Home from "./Home";
 import Dashboard from "./Dashboard";
-import CreateBike from "./CreateBike";
+// import CreateBike from "./CreateBike";
+import TopNav from './TopNav'
+// import Registration from "./auth/Registration";
+// import BikeMap from "./BikeMap";
 
 export default class App extends Component {
   constructor() {
@@ -12,7 +15,9 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      user: {},
+      allUsers: {},
+      mode: "login"
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -32,7 +37,7 @@ export default class App extends Component {
             user: response.data.user
           });
         } else if (
-          !response.data.logged_in &
+          !response.data.logged_in &&
           (this.state.loggedInStatus === "LOGGED_IN")
         ) {
           this.setState({
@@ -46,8 +51,20 @@ export default class App extends Component {
       });
   }
 
+  // getPostsData(){
+  //   axios
+  //   .get("http://localhost:3001/users")
+  //   .then(resp => {
+  //     this.setState({
+  //       allUsers: {...this.state.allUsers, resp}
+  //     })
+  //   })
+  // }
+
   componentDidMount() {
     this.checkLoginStatus();
+    // this.getPostsData()
+
   }
 
   handleLogout() {
@@ -64,9 +81,21 @@ export default class App extends Component {
     });
   }
 
+  changeMode(newMode){
+    this.setState({
+      mode: newMode
+    })
+  }
+
+
   render() {
     return (
       <div className="app">
+          <TopNav
+            handleLogout={this.handleLogout}
+            currentUser={this.state.user}
+            loggedInStatus={this.state.loggedInStatus}
+          />
         <BrowserRouter>
           <Switch>
             <Route
@@ -78,23 +107,12 @@ export default class App extends Component {
                   handleLogin={this.handleLogin}
                   handleLogout={this.handleLogout}
                   loggedInStatus={this.state.loggedInStatus}
-                  currentUser={this.state.user}
+                  mode={this.state.mode}
+                  changeMode={this.changeMode}
                 />
               )}
             />
-            <Route
-              exact
-              path={"/login"}
-              render={props => (
-                <Login
-                  {...props}
-                  handleLogin={this.handleLogin}
-                  handleLogout={this.handleLogout}
-                  handleSuccessfulAuth={this.handleSuccessfulAuth}
-                />
-              )}
-            />
-
+{/* 
             <Route
               exact
               path={"/create_bike"}
@@ -107,7 +125,7 @@ export default class App extends Component {
                   currentUser={this.state.user}
                 />
               )}
-            />
+            /> */}
             <Route
               exact
               path={"/dashboard"}
@@ -115,9 +133,35 @@ export default class App extends Component {
                 <Dashboard
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
+                  currentUser={this.state.user}
+                  // allUsers={this.state.allUsers}
+                />
+              )}
+
+            />
+
+            {/* <Route
+              exact
+              path={"/sign-up"}
+              render={props => (
+                <Registration
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
                 />
               )}
             />
+
+            <Route
+              exact
+              path={"/find-a-bike"}
+              render={props => (
+                <BikeMap
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                  currentUser={this.state.user}
+                /> */}
+              
+            {/* /> */}
           </Switch>
         </BrowserRouter>
       </div>
@@ -130,9 +174,7 @@ export default class App extends Component {
 
 // import Home from "./Home";
 // // import Dashboard from "./Dashboard";
-// import Registration from "./auth/Registration";
 // import Login from './auth/Login'
-// import FindABike from "./FindABike";
 // import ListMyBike from "./ListBike/ListmyBike"
 
 // import 'bootstrap/dist/css/bootstrap.min.css';

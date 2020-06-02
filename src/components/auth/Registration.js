@@ -16,6 +16,7 @@ export default class Registration extends Component {
       state: "",
       zip_code: "",
       phone_number: "",
+      ip_address: "",
       avatar: "",
       registrationErrors: ""
     };
@@ -31,7 +32,7 @@ export default class Registration extends Component {
   }
 
   handleSubmit(event) {
-    const { first_name, last_name, email, password, password_confirmation, street, city, state, zip_code, phone_number } = this.state;
+    const { first_name, last_name, email, password, password_confirmation, street, city, state, zip_code, phone_number, ip_address } = this.state;
 
     axios
       .post(
@@ -48,6 +49,7 @@ export default class Registration extends Component {
             state: state,
             zip_code: zip_code,
             phone_number: phone_number,
+            ip_address: ip_address
             // avatar: avatar
           }
         },
@@ -62,6 +64,21 @@ export default class Registration extends Component {
         console.log("registration error", error);
       });
     event.preventDefault();
+  }
+
+  componentDidMount(){
+    fetch('https://api.ipify.org?format=jsonp?callback=?', {
+      method: 'GET',
+      headers: {},
+    })
+    .then(resp => {
+      return resp.text()
+    }).then(ip => {
+      // console.log('ip', ip)
+      this.setState({
+        ip_address: ip
+      })
+    })
   }
 
   render() {
@@ -156,12 +173,12 @@ export default class Registration extends Component {
             onChange={this.handleChange}
             required
           />
-          <input
+          {/* <input
             type="file"
             name="avatar"
             value={this.state.avatar}
             onChange={this.handleChange}
-          />
+          /> */}
 
           <button type="submit">Register</button>
         </form>
