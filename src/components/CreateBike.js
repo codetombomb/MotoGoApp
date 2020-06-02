@@ -3,7 +3,6 @@
 
 import React, { Component } from 'react';
 import axios from 'axios'
-import Redirect from 'react-router'
 
 class CreateBike extends Component {
     constructor(props){
@@ -18,18 +17,13 @@ class CreateBike extends Component {
             license_plate: "",
             bike_name: "",
             category: "",
-            photos: [],
+            // photos: [],
             createBikeErrors: ""
         }
         this.handleChangeBikeState = this.handleChangeBikeState.bind(this);
 
     }
-    componentDidMount(){
-        this.setState({
-            user: this.props.currentUser.id 
-        })
-    }
-
+ 
     handleChangeBikeState(event) {
         event.preventDefault()
         console.log(event.target.name)
@@ -76,7 +70,6 @@ class CreateBike extends Component {
     render() {
         return(
             <div>
-            {this.state.user === "" ? <Redirect to="/login"/> : 
                 <form onSubmit={this.handleSubmit}>
 
                     <input
@@ -153,7 +146,7 @@ class CreateBike extends Component {
 
                     <button type="submit">Create Bike</button>
 
-                </form>}
+                </form>
             </div>
         )
     }
