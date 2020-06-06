@@ -5,15 +5,23 @@ import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 
 import HomeImg from '../style/images/home.jpg'
-import TopNav from "./TopNav";
 
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
+      this.state = {
+      showReg: false
+    }
+
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
+  }
+  componentDidMount(){
+    this.setState({
+      showReg: false
+    })
   }
 
 
@@ -21,6 +29,8 @@ export default class Home extends Component {
   handleSuccessfulAuth(data) {
     this.props.handleLogin(data);
     this.props.history.push("/dashboard");
+    document.body.style.backgroundImage = ""
+
   }
 
 
@@ -36,47 +46,62 @@ export default class Home extends Component {
       });
   }
 
+  setHomeImg() {
+    document.body.style.backgroundImage = `url('${HomeImg}')`
+  }
+
+  toggleRegistrationForm(){ 
+    this.setState({
+      showReg: !this.state.showReg
+    })
+
+  }
+
+
 
   render() {
-      return (
-        <div>
-          {document.body.style.backgroundImage = `url('${HomeImg}')`}
-           <Registration handleSuccessfulAuth={this.handleSuccessfulAuth}/>
-          <h1 id="moto">moto<mark className='green'>GO</mark></h1>
-          <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
-        </div>
-      )
-      
-    }
+    return (
+      <div>
+        {this.setHomeImg()}
+        <h1 id="moto">moto<mark className='green'>GO</mark></h1>
+        {this.state.showReg  ? <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} /> : 
+        <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />}
+        <button onClick={this.toggleRegistrationForm}>or sign up</button>
         
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+       
+      </div>
+    )
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // import React, { Component } from "react";
   // // import axios from "axios";
-  
+
   // import Registration from "./auth/Registration";
 // // import Login from "./auth/Login";
 // import TopNav from './TopNav'

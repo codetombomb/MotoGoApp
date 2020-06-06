@@ -166,9 +166,10 @@ export default class Registration extends Component {
           />
 
           <input
-            type="phone_number"
+            type="tel"
             name="phone_number"
             placeholder="Phone Number"
+            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             value={this.state.phone_number}
             onChange={this.handleChange}
             required

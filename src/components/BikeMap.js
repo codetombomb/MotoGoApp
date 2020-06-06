@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import PostCard from './PostCard';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -9,84 +8,69 @@ class BikeMap extends Component {
         super(props)
         this.state = {
             center: {
-                lat: 30.4461,
-                lng: -97.6240
+                lat: 36.5320,
+                lng: 140.2254
             },
-            zoom: 11
+            zoom: 11,
+            userCenter: {},
+            markerList: []
         }
-      
     }
 
-    setCenter(){
-    //  console.log(this.props)
+    componentDidMount() {
+        this.setCenter()
+        this.setMarkerList()
     }
-    
-    componentDidMount(){
-      this.setCenter()
+
+    setMarkerList() {
+        let markers = []
+        this.props.posts.map(post => {
+            if(post.owner.lat){
+            var x = post.owner.lat
+            } else {
+                var x = 30.2672
+            }
+            if(post.owner.lon){
+            var y = post.owner.lon
+            } else {
+                var y = 97.7431
+            }
+            let coords = {lat: x, lng: y}
+            markers.push(coords)
+        })
+        this.setState({
+            markerList: [...markers]
+        })
+    }
+
+    setCenter() {
+        let newCenter = { lat: 36.5320, lng: 140.2254 }
+        console.log(newCenter)
+        this.setState({
+            userCenter: { lat: this.props.user.lat, lng: this.props.user.lon }
+        })
     }
 
 
     render() {
+
         return (
+
             // Important! Always set the container height explicitly
-            <div style={{ height: '100vh', width: '50%' }}>
+            <div className="bikeMap">
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyBLOHplAvs-vJi5pNxpCTWTLI1JQKHIRaM" }}
                     defaultCenter={this.state.center}
                     defaultZoom={this.state.zoom}
+                    center={this.state.userCenter}
                 >
-                    {/* this needs to be the posts users lat long */} 
-                    <AnyReactComponent
-                        lat={59.955413}
-                        lng={30.337844}
-                        text="My Marker"
-                    />
+                    {/* this needs to be the posts users lat long */}
+                    
                 </GoogleMapReact>
+
             </div>
         );
     }
 }
 
 export default BikeMap;
-
-
-
-
-
-// import React from 'react';
-// import { GoogleMap, withScriptjs, withGoogleMap, Marker } from 'react-google-maps'
-// import PostCard from './PostCard';
-
-
-// function Map() {
-//     return (
-//             <GoogleMap
-//                 defaultZoom={10}
-//                 defaultCenter={{ lat: 30.267153, lng: -97.743057 }}
-//             />
-//     )
-// }
-// const WrappedMap = withScriptjs(withGoogleMap(Map))
-
-
-
-// export default function BikeMap() {
-
-//     return(
-//         <div  
-//         style={{
-//             width: '100vw',
-//             height: '100vh'
-//         }}>
-
-//             <WrappedMap 
-//             googleMapURL={ `https://maps.googleapis.com/maps/api/js?v=3.exp&
-//             libraries=geometry,drawing,places&key=AIzaSyBLOHplAvs-vJi5pNxpCTWTLI1JQKHIRaM` }
-//               loadingElement={<div style={{ height: "100%" }} />}
-//               containerElement={<div className="map" style={{ height: "100%" }} />}
-//               mapElement={<div style={{ height: "90%", width: "50%" }} />}
-//             />
-//             <PostCard/>
-//         </div>
-//     )
-// }

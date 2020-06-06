@@ -28,20 +28,20 @@ class TopNav extends Component {
 
     render() {
         return (
-            <div>
+            <div className="sticky" id="navbar">
                 <header>
                     <div className="container">
                         <img className="navbar-logo" alt="logo" src={MotoLogo} />
                         <div>
-                        {this.props.currentUser ? <h1>Current User: {this.props.currentUser.first_name}</h1> : <h1>No one logged in</h1> }
+                        {/* {this.props.currentUser ? <h1>Current User: {this.props.currentUser.first_name}</h1> : <h1>No one logged in</h1> } */}
                         </div>
 
                         <nav>
                             <ul>
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/dashboard">Dashboard</a></li>
-                                <li><a href="/find-a-bike">Find A Bike</a></li>
+                                {/* <li><a href="/dashboard">Dashboard</a></li> */}
                                 <li><a href="/sign-up">Sign Up</a></li>
+                                <li><a href="/post-my-bike">Post My Bike</a></li>
                                 <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li>
                             </ul>
                         </nav>
