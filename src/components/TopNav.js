@@ -7,21 +7,21 @@ import axios from 'axios'
 
 
 class TopNav extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-     
+
     }
 
-    handleLogoutClick(){
+    handleLogoutClick() {
         axios
-        .delete("http://localhost:3001/logout", { withCredentials: true })
-        .then(response => {
-          this.props.handleLogout();
-          this.props.history.push("/");
-        })
-        .catch(error => {
-          console.log("logout error", error);
-        });
+            .delete("http://localhost:3001/logout", { withCredentials: true })
+            .then(response => {
+                this.props.handleLogout();
+                this.props.history.push("/");
+            })
+            .catch(error => {
+                console.log("logout error", error);
+            });
     }
 
 
@@ -30,21 +30,38 @@ class TopNav extends Component {
         return (
             <div className="sticky" id="navbar">
                 <header>
+                    {this.props.currentUser.id ? 
+                    <img
+                        className="user-img"
+                        alt="avatar"
+                        src={this.props.currentUser.avatar_url}
+                    />
+                    :
+                    <img
+                        className="user-img"
+                        alt="avatar"
+                        src="https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
+                    />
+                    }
                     <div className="container">
                         <img className="navbar-logo" alt="logo" src={MotoLogo} />
-                        <div>
+
                         {/* {this.props.currentUser ? <h1>Current User: {this.props.currentUser.first_name}</h1> : <h1>No one logged in</h1> } */}
-                        </div>
+
 
                         <nav>
                             <ul>
-                                <li><a href="/">Home</a></li>
-                                {/* <li><a href="/dashboard">Dashboard</a></li> */}
-                                <li><a href="/sign-up">Sign Up</a></li>
-                                <li><a href="/post-my-bike">Post My Bike</a></li>
-                                <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li>
+                                {!this.props.currentUser.id ? 
+                                <li><a href="/">Home</a></li> : null}
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                {!this.props.currentUser.id ? 
+                                <li><a href="/sign-up">Sign Up</a></li> : 
+                                <li><a href="/post-my-bike">Post My Bike</a></li>}
+                                {this.props.currentUser.id ?
+                                <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li> : null}
                             </ul>
                         </nav>
+
                     </div>
                 </header>
 

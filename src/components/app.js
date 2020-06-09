@@ -7,7 +7,7 @@ import Dashboard from "./Dashboard";
 import CreateBikePost from "./CreateBikePost";
 import TopNav from './TopNav'
 import BikeMap from "./BikeMap";
-// import Registration from "./auth/Registration";
+import Registration from "./auth/Registration";
 // import BikeMap from "./BikeMap";
 
 export default class App extends Component {
@@ -25,16 +25,16 @@ export default class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  getAllPosts() {
-    axios
-      .get("http://localhost:3001/posts")
-      .then(resp => {
-        let posts = resp.data
-        this.setState({
-          posts: [...posts],
-        })
-      })
-  }
+  // getAllPosts() {
+  //   axios
+  //     .get("http://localhost:3001/posts")
+  //     .then(resp => {
+  //       let posts = resp.data
+  //       this.setState({
+  //         posts: [...posts],
+  //       })
+  //     })
+  // }
 
   checkLoginStatus() {
     axios
@@ -65,7 +65,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.checkLoginStatus();
-    this.getAllPosts()
+    // this.getAllPosts()
 
   }
 
@@ -134,13 +134,13 @@ export default class App extends Component {
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
                   currentUser={this.state.user}
-                  posts={this.state.posts}
+                  // posts={this.state.posts}
                 />
               )}
 
             />
 
-            <Route
+            {/* <Route
             exact
             path={"/find-a-bike"}
             render={props => (
@@ -149,9 +149,9 @@ export default class App extends Component {
               />
             )}
 
-            />
+            /> */}
 
-            {/* <Route
+           <Route
               exact
               path={"/sign-up"}
               render={props => (
@@ -161,7 +161,7 @@ export default class App extends Component {
                 />
               )}
             />
-
+            {/*
             <Route
               exact
               path={"/find-a-bike"}

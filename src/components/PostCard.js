@@ -6,7 +6,7 @@ class PostCard extends Component {
     }
 
     goToShowPage(e) {
-        console.log(e)
+        console.log(e.target)
     }
 
     render() {
