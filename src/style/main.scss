@@ -13,10 +13,12 @@ html {
 
 //styling for MotGo name on home screen
 #moto {
-    margin-left: 125px;
+    margin-left: 100px;
     margin-top: 80px;
-    font-size: 95px;
+    font-size: 250px;
     color: white;
+    position: relative;
+    top: 40px;
 }
 
 
@@ -25,8 +27,7 @@ mark.green {
     color: greenyellow;
     background: none;
     opacity: 0.5;
-    font-size: 125px;
-    
+    font-size: 250px;
 }
 
 .postShowImg {
@@ -51,12 +52,12 @@ mark.green {
 .login-form {
     background-color: rgba(39, 39, 38, 0.7);
     border-radius: 25px;
-    height: 150px;
-    width: 300px;
-    margin-top: 30px;
-    margin-left: 75px;
-    padding-top: 50px;
-   padding: 20px; 
+    height: 175px;
+    width: 400px;
+    position: relative;
+    left: 300px;
+    top: 120px;
+    padding: 20px; 
 }
 
 .createBike {
@@ -73,16 +74,20 @@ mark.green {
 .login-input {
     margin-left: 35px;
     border-radius: 75px;
-    width: 225px;
-    height: 25px;
+    width: 325px;
+    height: 35px;
 }
 .login-submit {
     position: relative;
-    margin-top: 30px;
-    margin-left: 120px;
-    width: 50px;
+    left: 140px;
+    top: 40px;
+    width: 100px;
     height: 25px;
-    border-radius: 75px;
+    font-family: "play";
+    font-size: 20px;
+    font-weight: bold;
+    
+   
 }
 
 // navbar stuff
@@ -229,6 +234,10 @@ nav a::before {
       margin-top: 4px;
   }
 
+  #filter-options {
+    width: 300px;
+  }
+
   .avatar-img {
       margin-right: 5px;
   }
@@ -259,11 +268,12 @@ body {
 }
 
 .bikeMap {
-    padding-right: 15px;
-    margin-top: -13px;
-    height: 83vh;
-    width: 60%;
-    float: right;
+    padding: 10px;
+    margin-top: 0px;
+    height: 100vh;
+    width: 120%;
+    margin-left: 550px;
+    position: fixed;
 }
 
 

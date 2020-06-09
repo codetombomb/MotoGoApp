@@ -6,6 +6,7 @@ import MotoLogo from '../style/images/moto-logo.png'
 const style = {
     width: '50%',
     height: '75%',
+    marginTop: '43px'
     
 }
 
@@ -49,7 +50,7 @@ export class BikeMapTwo extends Component {
             }}
             icon={{
                 url: MotoLogo,
-                scaledSize: new google.maps.Size(40,40)
+                scaledSize: new google.maps.Size(60,60)
             }}
             onClick={() => this.props.handleSelectedBike(post, this.props.history)} 
             />
@@ -62,7 +63,7 @@ export class BikeMapTwo extends Component {
             <Map
                 google={this.props.google}
                 style={style}
-                zoom={3.56}
+                zoom={5}
                 initialCenter={{lat: 37.0902, lng: -95.7129}}
             >
 

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-// import BikeMap from './BikeMap'
 import BikeMapTwo from './BikeMapTwo'
 import PostCard from './PostCard'
+import Select from 'react-select'
 import axios from 'axios'
 
+
+const options = [
+  { value: 'Make', label: 'Make' },
+  { value: 'Model', label: 'Model' },
+  { value: 'Location', label: 'Location' }
+]
 
 class Dashboard extends Component {
   constructor(props) {
@@ -13,56 +19,69 @@ class Dashboard extends Component {
       currentUser: {},
       curUserCoords: {},
       posts: [],
-      postsCoords: []
+      postsCoords: [],
+      searchFilter: ""
     }
+
+    this.handleFilterSelection = this.handleFilterSelection.bind(this)
   }
 
 
   componentDidMount() {
-    this.setCurUserCoords()
+    // this.setPosts()
+    // this.setCurUserCoords()
     axios
-    .get("http://localhost:3001/posts")
-    .then(resp => {
-      let posts = resp.data
-      this.setPostCoords(posts)
-      this.setState({
-        posts: [...posts],
+      .get("http://localhost:3001/posts")
+      .then(resp => {
+        let posts = resp.data
+        // this.setPostCoords(posts)
+        this.setState({
+          posts: [...posts],
+        })
       })
-    })
   }
 
-  setCurUserCoords(){
-    let curUserCoords = {
-      lat: this.props.currentUser.lat,
-      lng: this.props.currentUser.lon
-    }
-    this.setState({
-      curUserCoords
-    })
-  }
+  // setCurUserCoords() {
+  //   let curUserCoords = {
+  //     lat: this.props.currentUser.lat,
+  //     lng: this.props.currentUser.lon
+  //   }
+  //   this.setState({
+  //     curUserCoords
+  //   })
+  // }
 
-  setPostCoords(data){
-    const newData = []
-    data.map(post => {
-      
-      if(post.owner.lat){
-        var newLat = post.owner.lat
-      } else {
-        var newLat = 30.4461
-      }
-      if(post.owner.lon){
-        var newLng = post.owner.lon
-      } else {
-        var newLng = -97.6240
-      }
-      let coord = {userId: post.owner.id, latitude: newLat, longitude: newLng}
-      newData.push(coord)
-    })
-    this.setState({
-      postCoords: [...newData]
-    })
+  // setPostCoords(data) {
+  //   const newData = []
+  //   data.map(post => {
 
-  }
+  //     if (post.owner.lat) {
+  //       var newLat = post.owner.lat
+  //     } else {
+  //       var newLat = 30.4461
+  //     }
+  //     if (post.owner.lon) {
+  //       var newLng = post.owner.lon
+  //     } else {
+  //       var newLng = -97.6240
+  //     }
+  //     let coord = { userId: post.owner.id, latitude: newLat, longitude: newLng }
+  //     newData.push(coord)
+  //   })
+  //   this.setState({
+  //     postCoords: [...newData]
+  //   })
+
+  // }
+
+  // setPosts(){
+  //   if (this.state.searchFilter === ""){
+  //     debugger
+  //     this.setState({
+  //       posts: [...this.props.posts]
+  //     })
+  //   }
+  // }
 
 
 
@@ -70,9 +89,16 @@ class Dashboard extends Component {
     document.body.style.backgroundColor = "white"
   }
 
-  handleSelectedBike(bikeData, info){
+  handleSelectedBike(bikeData, info) {
     debugger
   }
+
+  handleFilterSelection(event) {
+    this.setState({
+      searchFilter: event.value
+    })
+  }
+
 
   render() {
     return (
@@ -85,13 +111,19 @@ class Dashboard extends Component {
         <br />
         <br />
         <br />
-        {/* <CreateBike loggedInStatus={this.props.loggedInStatus} /> */}
-        {/* <BikeMap user={this.state.setCurUserCoords} posts={this.state.posts} /> */}
-        <BikeMapTwo 
-        user={this.state.curUserCoords} 
-        postsCoords={this.state.postsCoords}
-        handleSelectedBike={this.handleSelectedBike}
+        <div style={{ padding: "10px", paddingLeft: "60px", marginTop: "-20px", position: "fixed", backgroundColor: "white" }}>
+          <h1 style={{ float: "left", position: "relative", marginTop: "5px", paddingRight: "15px" }}>filter by</h1>
+
+          <Select id="filter-options" options={options} onChange={this.handleFilterSelection} />
+
+        </div>
+
+        <BikeMapTwo
+          user={this.state.curUserCoords}
+          postsCoords={this.state.postsCoords}
+          handleSelectedBike={this.handleSelectedBike}
         />
+
         {this.state.posts.map(post =>
           <PostCard key={post.id} postInfo={post} />
         )}

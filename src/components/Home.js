@@ -65,10 +65,7 @@ export default class Home extends Component {
         {this.setHomeImg()}
         <h1 id="moto">moto<mark className='green'>GO</mark></h1>
         {this.state.showReg  ? <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} /> : 
-        <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />}
-        <button onClick={this.toggleRegistrationForm}>or sign up</button>
-        
-       
+        <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />}      
       </div>
     )
 
