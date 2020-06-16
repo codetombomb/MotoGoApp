@@ -33,15 +33,15 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getAllPosts()
-    this.checkForConfirmation()
+    // this.checkForConfirmation()
   }
   
-  checkForConfirmation(){
-    if(this.props.confirmRentalInfo.id){
-      debugger
-      this.props.history.push("/rental-review")
-    }
-  }
+  // checkForConfirmation(){
+  //   if(this.props.confirmRentalInfo.id){
+  //     debugger
+  //     this.props.history.push("/rental-review")
+  //   }
+  // }
 
 
   getAllPosts() {

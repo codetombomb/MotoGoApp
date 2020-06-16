@@ -28,8 +28,8 @@ class RentalConfirmationPage extends Component {
                     top: '40px'
                 }} >
                     <h1>Bike Information</h1>
-                    <h3>Description: {this.props.rentalDetails.description}</h3>
-                    <h3>Total Price: ${this.props.rentalDetails.post.start_date - this.props.rentalDetails.post.end_date * this.props.rentalDetails.post.price_per_day}</h3>
+                    {/* <h3>Description: {this.props.rentalDetails.posts.description}</h3>
+                    <h3>Price: {this.props.rentalDetails.posts.price_per_day}</h3> */}
 
                     <img src="https://thumpertalk.com/applications/core/interface/imageproxy/imageproxy.php?img=http://www.zeta-racing.com/bikes/images/drz/pz04.jpg&key=c5a35e44fa9087e1d4b2c043c44ad31aebacf93a990c19b99211306a8adb18c3" alt="Avatar" />
 

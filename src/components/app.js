@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./Home";
@@ -11,9 +11,13 @@ import RentBikePage from "./RentBikePage";
 import RentBikeForm from "./RentBikeForm"
 import RentalConfirmationPage from './RentalConfirmationPage'
 
+import { createBrowserHistory } from 'history'
+const history = createBrowserHistory();
+
 export default class App extends Component {
   constructor() {
     super();
+
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
@@ -29,7 +33,6 @@ export default class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.postRentBike = this.postRentBike.bind(this)
   }
-  _isMounted = false
 
 
   checkLoginStatus() {
@@ -97,9 +100,6 @@ export default class App extends Component {
   }
 
   postRentBike(e) {
-    this.setState({
-      rentBikeInfo: {}
-    })
     e.preventDefault();
     const formData = {
       renter_id: this.state.user.id,
@@ -113,12 +113,12 @@ export default class App extends Component {
     })
       .then(resp => {
         console.log(resp.data)
-        this._isMounted = true
-        if (this._isMounted) {
           this.setState({
-            confirmRentalInfo: { ...resp.data }
+            confirmRentalInfo: { ...resp.data },
+            rentBikeInfo: {}
           })
-        }
+          history.push('/rental-review')
+      
       })
 
   }
@@ -138,9 +138,7 @@ export default class App extends Component {
     });
   }
 
-  componentWillUnmount(){
-    this._isMounted = false;
-  }
+
   render() {
     return (
       <div className="app">
@@ -149,7 +147,7 @@ export default class App extends Component {
           currentUser={this.state.user}
           loggedInStatus={this.state.loggedInStatus}
         />
-        {this.state.confirmRentalInfo.id ? <Redirect to="/rental-review" /> : null}
+        {/* {this.state.confirmRentalInfo.id ? <Redirect to="/rental-review" /> : null} */}
         {this.state.rentBikeInfo.id ?
           <RentBikeForm
             bikeInfo={this.state.rentBikeInfo}
@@ -158,7 +156,7 @@ export default class App extends Component {
             handleSelectEndDate={this.handleSelectEndDate}
             postRentBike={this.postRentBike}
           /> :
-          <BrowserRouter>
+          <Router history={history}>
             <Switch>
               <Route
                 exact
@@ -249,7 +247,7 @@ export default class App extends Component {
                 )}
               />
             </Switch>
-          </BrowserRouter>
+          </Router>
         }
       </div>
     );
