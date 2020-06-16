@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./Home";
@@ -22,13 +22,14 @@ export default class App extends Component {
       confirmRentalInfo: {},
       startDate: "",
       endDate: ""
-
+      
     };
-
+    
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.postRentBike = this.postRentBike.bind(this)
   }
+  _isMounted = false
 
 
   checkLoginStatus() {
@@ -95,7 +96,7 @@ export default class App extends Component {
     })
   }
 
-  postRentBike(e){
+  postRentBike(e) {
     this.setState({
       rentBikeInfo: {}
     })
@@ -104,18 +105,21 @@ export default class App extends Component {
       renter_id: this.state.user.id,
       post_id: this.state.rentBikeInfo.id,
       start_date: this.state.startDate,
-      end_date: this.state.endDate
+      end_date: this.state.endDate,
+      status: "Rented"
     }
     axios.post("http://localhost:3001/renter_posts", {
       rent_info: formData
     })
-    .then(resp => {
-      console.log(resp.data)
-      this.setState({
-        confirmRentalInfo: {...resp.data}
+      .then(resp => {
+        console.log(resp.data)
+        this._isMounted = true
+        if (this._isMounted) {
+          this.setState({
+            confirmRentalInfo: { ...resp.data }
+          })
+        }
       })
-     
-    })
 
   }
 
@@ -134,6 +138,9 @@ export default class App extends Component {
     });
   }
 
+  componentWillUnmount(){
+    this._isMounted = false;
+  }
   render() {
     return (
       <div className="app">
@@ -142,6 +149,7 @@ export default class App extends Component {
           currentUser={this.state.user}
           loggedInStatus={this.state.loggedInStatus}
         />
+        {this.state.confirmRentalInfo.id ? <Redirect to="/rental-review" /> : null}
         {this.state.rentBikeInfo.id ?
           <RentBikeForm
             bikeInfo={this.state.rentBikeInfo}
@@ -194,6 +202,7 @@ export default class App extends Component {
                     handleBikeMapMarkerClick={this.handleBikeMapMarkerClick}
                     handlePostCardClick={this.handleBikeMapMarkerClick}
                     rentBikeInfo={this.state.rentBikeInfo}
+                    confirmRentalInfo={this.state.confirmRentalInfo}
                   />
                 )}
               />
@@ -209,14 +218,15 @@ export default class App extends Component {
               />
 
               <Route
-              exact 
-              path={"/rental-review"}
-              render={props => (
-                <RentalConfirmationPage
-                {...props}
-                rentalDetails={this.state.rentBikeInfo}
-                />
-              )}
+                exact
+                path={"/rental-review"}
+                render={props => (
+                  <RentalConfirmationPage
+                    {...props}
+                    rentalDetails={this.state.confirmRentalInfo}
+                    currentUser={this.state.user}
+                  />
+                )}
               />
               <Route
                 exact
@@ -246,4 +256,4 @@ export default class App extends Component {
   }
 }
 
-	
+

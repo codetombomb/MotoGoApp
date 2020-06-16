@@ -4,6 +4,8 @@ import PostCard from './PostCard'
 import Select from 'react-select'
 import axios from 'axios'
 import RentBikePage from './RentBikePage'
+import RentalConfirmationPage from './RentalConfirmationPage'
+import { Redirect } from 'react-router';
 
 
 const options = [
@@ -20,7 +22,6 @@ class Dashboard extends Component {
     this.state = {
       posts: [],
       searchFilter: "none"
-      // toggleShowBike: false
     }
 
     // this.handleFilterSelection = this.handleFilterSelection.bind(this)
@@ -32,7 +33,16 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getAllPosts()
+    this.checkForConfirmation()
   }
+  
+  checkForConfirmation(){
+    if(this.props.confirmRentalInfo.id){
+      debugger
+      this.props.history.push("/rental-review")
+    }
+  }
+
 
   getAllPosts() {
     axios
@@ -54,6 +64,7 @@ class Dashboard extends Component {
       toggleShowBike: true
     })
   }
+
   rentBikePage = (info) => {
     this.props.history.push("/bike")
   }
@@ -91,6 +102,7 @@ class Dashboard extends Component {
     }
     return (
       <div>
+      {/* {this.props.confirmRentalInfo.id ? <Redirect to="/rental-review"/> : null} */}
         {this.setBackgroundColor()}
         <br />
         <br />
@@ -109,6 +121,7 @@ class Dashboard extends Component {
           handleBikeMapMarkerClick={this.props.handleBikeMapMarkerClick}
           history={this.props.history}
         />
+    
         {posts}
       </div>
     )

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class PostShowPage extends Component {
     constructor(props) {
         super(props)
+        this.handleConfirmClick = this.handleConfirmClick.bind(this)
     }
 
     handleSubmitClick(){
@@ -10,6 +11,11 @@ class PostShowPage extends Component {
         debugger
         this.history.push('/dashboard')
     }
+
+    handleConfirmClick(){
+        this.props.history.push('/dashboard')
+    }
+    
     render() {
         return (
             <div>
@@ -30,7 +36,7 @@ class PostShowPage extends Component {
                 </div>
                 <h1 id="price">${this.props.price}/day</h1>
 
-                <button onClick={this.props.handleSubmit}>Confirm</button>
+                <button onClick={this.handleConfirmClick}>Confirm</button>
                 <button onClick={this.props.toggleBikeShow}>Go Back</button>
             </div>
         )
