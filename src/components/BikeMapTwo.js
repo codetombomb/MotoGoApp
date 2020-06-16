@@ -15,44 +15,25 @@ export class BikeMapTwo extends Component {
         super(props)
         this.state = {
             user: {},
-            allPosts: [
-                {latitude: 30.4394, longitude: -97.62, userId: 1},
-                {latitude: 47.6339, longitude: -122.3476, userId: 2},
-                {latitude: 35.6895, longitude: 139.6917, userId: 3},
-                {latitude: 53.9576, longitude: -1.0827, userId: 4},
-                {latitude: 33.3807, longitude: -84.7997, userId: 5},
-                {latitude: 34.0522, longitude: -118.2437, userId: 6},
-                {latitude: 43.3862, longitude: -79.8371, userId: 7},
-                {latitude: 30.4461, longitude: -97.624, userId: 8},
-                {latitude: 40.7091, longitude: -112.1016, userId: 9},
-                {latitude: 30.4461, longitude: -97.624, userId: 10},
-                {latitude: 36.0512, longitude: -78.8577, userId: 11},
-                ]
+            // allPosts: []
         }
 
     }
-    componentDidMount() {
-        let user = this.props.user
-        this.setState({
-            user: user
-            // allPosts: [...allPosts]
-        })
-    }
+  
 
     displayMarkers(){
-         return this.state.allPosts.map((post,index) => {
+         return this.props.posts.map((post,index) => {
             return <Marker 
-            id={index}
-            key={post.userId} 
+            key={index} 
             position={{
-                lat: post.latitude,
-                lng: post.longitude
+                lat: post.owner.lat,
+                lng: post.owner.lon
             }}
             icon={{
                 url: MotoLogo,
                 scaledSize: new google.maps.Size(60,60)
             }}
-            onClick={() => this.props.handleSelectedBike(post, this.props.history)} 
+            onClick={() => this.props.handleBikeMapMarkerClick(post)} 
             />
         })
     }
@@ -66,7 +47,6 @@ export class BikeMapTwo extends Component {
                 zoom={5}
                 initialCenter={{lat: 37.0902, lng: -95.7129}}
             >
-
             {this.displayMarkers()}
             </Map>
             </div>
@@ -81,37 +61,3 @@ export default GoogleApiWrapper({
 })(BikeMapTwo);
 
 
-
-
-// 0
-// {latitude: 30.4394, longitude: -97.62, userId: 1}
-
-// 1
-// {latitude: 47.6339, longitude: -122.3476, userId: 2}
-
-// 2
-// {latitude: 35.6895, longitude: 139.6917, userId: 3}
-
-// 3
-// {latitude: 53.9576, longitude: -1.0827, userId: 4}
-
-// 4
-// {latitude: 33.3807, longitude: -84.7997, userId: 5}
-
-// 5
-// {latitude: 34.0522, longitude: -118.2437, userId: 6}
-
-// 6
-// {latitude: 43.3862, longitude: -79.8371, userId: 7}
-
-// 7
-// {latitude: 30.4461, longitude: -97.624, userId: 8}
-
-// 8
-// {latitude: 40.7091, longitude: -112.1016, userId: 9}
-
-// 9
-// {latitude: 30.4461, longitude: -97.624, userId: 10}
-
-// 10
-// {latitude: 36.0512, longitude: -78.8577, userId: 11}

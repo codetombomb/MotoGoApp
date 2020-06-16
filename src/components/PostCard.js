@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 
+
 class PostCard extends Component {
     constructor(props) {
         super(props)
     }
-
-    goToShowPage(e) {
-        console.log(e.target)
-    }
+   
 
     render() {
         return (
             <div>
                 <div className="card" >
                     <a 
-                    onClick={this.goToShowPage} 
+                
+                    onClick={() => this.props.handlePostCardClick(this.props.postInfo)} 
                     style={{ cursor: "pointer" }}>
                         <img src="https://thumpertalk.com/applications/core/interface/imageproxy/imageproxy.php?img=http://www.zeta-racing.com/bikes/images/drz/pz04.jpg&key=c5a35e44fa9087e1d4b2c043c44ad31aebacf93a990c19b99211306a8adb18c3"
                         alt="Avatar"

@@ -3,9 +3,11 @@ import BikeMapTwo from './BikeMapTwo'
 import PostCard from './PostCard'
 import Select from 'react-select'
 import axios from 'axios'
+import RentBikePage from './RentBikePage'
 
 
 const options = [
+  { value: "none", label: "none" },
   { value: 'Make', label: 'Make' },
   { value: 'Model', label: 'Model' },
   { value: 'Location', label: 'Location' }
@@ -16,95 +18,80 @@ class Dashboard extends Component {
     super(props)
 
     this.state = {
-      currentUser: {},
-      curUserCoords: {},
       posts: [],
-      postsCoords: [],
-      searchFilter: ""
+      searchFilter: "none"
+      // toggleShowBike: false
     }
 
-    this.handleFilterSelection = this.handleFilterSelection.bind(this)
+    // this.handleFilterSelection = this.handleFilterSelection.bind(this)
+    this.getAllPosts = this.getAllPosts.bind(this)
+
   }
 
 
+
   componentDidMount() {
-    // this.setPosts()
-    // this.setCurUserCoords()
+    this.getAllPosts()
+  }
+
+  getAllPosts() {
     axios
       .get("http://localhost:3001/posts")
       .then(resp => {
         let posts = resp.data
-        // this.setPostCoords(posts)
         this.setState({
-          posts: [...posts],
+          posts: [...posts]
         })
       })
   }
-
-  // setCurUserCoords() {
-  //   let curUserCoords = {
-  //     lat: this.props.currentUser.lat,
-  //     lng: this.props.currentUser.lon
-  //   }
-  //   this.setState({
-  //     curUserCoords
-  //   })
-  // }
-
-  // setPostCoords(data) {
-  //   const newData = []
-  //   data.map(post => {
-
-  //     if (post.owner.lat) {
-  //       var newLat = post.owner.lat
-  //     } else {
-  //       var newLat = 30.4461
-  //     }
-  //     if (post.owner.lon) {
-  //       var newLng = post.owner.lon
-  //     } else {
-  //       var newLng = -97.6240
-  //     }
-  //     let coord = { userId: post.owner.id, latitude: newLat, longitude: newLng }
-  //     newData.push(coord)
-  //   })
-  //   this.setState({
-  //     postCoords: [...newData]
-  //   })
-
-  // }
-
-  // setPosts(){
-  //   if (this.state.searchFilter === ""){
-  //     debugger
-  //     this.setState({
-  //       posts: [...this.props.posts]
-  //     })
-  //   }
-  // }
-
-
 
   setBackgroundColor() {
     document.body.style.backgroundColor = "white"
   }
 
-  handleSelectedBike(bikeData, info) {
-    debugger
-  }
-
-  handleFilterSelection(event) {
+  handleSelectedBike(bikeData) {
     this.setState({
-      searchFilter: event.value
+      toggleShowBike: true
     })
+  }
+  rentBikePage = (info) => {
+    this.props.history.push("/bike")
   }
 
 
   render() {
+    let searchFilter = this.state.searchFilter
+    let posts
+    if (searchFilter === "none") {
+      posts = this.state.posts.map(post => {
+        return <PostCard 
+        key={post.id} 
+        postInfo={post}
+        handlePostCardClick={this.props.handlePostCardClick} />
+      })
+    } else if (searchFilter === "Make") {
+      console.log("filter changed to", searchFilter)
+      let filtered = []
+      this.props.posts.sort((postA, postB) => {
+        if (postA.bike.make < postB.bike.make) {
+          filtered.push(postA)
+        } else if (postA.bike.make < postB.bike.make) {
+          filtered.push(postA)
+        }
+      })
+      console.log(filtered)
+      return filtered.map(post => {
+        return <PostCard key={post.id} postInfo={post} />
+      })
+
+    } else if (searchFilter === "Model") {
+      console.log("filter changed to", searchFilter)
+    } else if (searchFilter === "Location") {
+      console.log("filter changed to", searchFilter)
+    }
     return (
       <div>
         {this.setBackgroundColor()}
-        {/* <h1 id="moto">moto<mark className='green'>GO</mark></h1> */}
         <br />
         <br />
         <br />
@@ -113,22 +100,19 @@ class Dashboard extends Component {
         <br />
         <div style={{ padding: "10px", paddingLeft: "60px", marginTop: "-20px", position: "fixed", backgroundColor: "white" }}>
           <h1 style={{ float: "left", position: "relative", marginTop: "5px", paddingRight: "15px" }}>filter by</h1>
-
           <Select id="filter-options" options={options} onChange={this.handleFilterSelection} />
-
         </div>
 
         <BikeMapTwo
-          user={this.state.curUserCoords}
-          postsCoords={this.state.postsCoords}
-          handleSelectedBike={this.handleSelectedBike}
+          user={this.props.currentUser}
+          posts={this.state.posts}
+          handleBikeMapMarkerClick={this.props.handleBikeMapMarkerClick}
+          history={this.props.history}
         />
-
-        {this.state.posts.map(post =>
-          <PostCard key={post.id} postInfo={post} />
-        )}
+        {posts}
       </div>
     )
   }
 }
 export default Dashboard;
+

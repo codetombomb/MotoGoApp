@@ -4,6 +4,12 @@ class PostShowPage extends Component {
     constructor(props) {
         super(props)
     }
+
+    handleSubmitClick(){
+        this.props.handleSubmit()
+        debugger
+        this.history.push('/dashboard')
+    }
     render() {
         return (
             <div>
@@ -23,6 +29,9 @@ class PostShowPage extends Component {
                 </p>
                 </div>
                 <h1 id="price">${this.props.price}/day</h1>
+
+                <button onClick={this.props.handleSubmit}>Confirm</button>
+                <button onClick={this.props.toggleBikeShow}>Go Back</button>
             </div>
         )
     }

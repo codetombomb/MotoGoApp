@@ -52,8 +52,8 @@ class CreateBikePost extends Component {
                         license_plate: license_plate,
                         bike_name: bike_name,
                         category: category,
-                        cost_per_day: "",
-                        description: "",
+                        cost_per_day: cost_per_day,
+                        description: description,
                         // photos: photos
                     }
 
