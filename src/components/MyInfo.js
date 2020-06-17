@@ -8,6 +8,7 @@ class MyInfo extends Component {
         super(props)
     
     }
+    
 
     render() {
         return (
