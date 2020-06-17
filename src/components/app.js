@@ -27,7 +27,7 @@ export default class App extends Component {
       confirmRentalInfo: {},
       startDate: "",
       endDate: "",
-      myRentals: []
+      // myRentals: []
 
     };
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
@@ -81,21 +81,9 @@ export default class App extends Component {
 
   componentDidMount() {
     this.checkLoginStatus();
-    if(this.state.loggedInStatus === "LOGGED_IN"){
-    // this.getBikeRentHistory()
-    }
   }
 
-  getBikeRentHistory(){
-    axios.get("http://localhost:3001/bike_rent_history", { withCredentials: true })
-        .then(resp => {
-            console.log(resp)
-            this.setState({
-                myRentals: [...resp.data]
-            })
-        })
-  }
-
+ 
   handleSelectStartDate = e => {
     e.preventDefault()
     console.log("Made it into the handleSelectStartDate()", e.target.value)
@@ -132,8 +120,8 @@ export default class App extends Component {
           confirmRentalInfo: { ...resp.data },
           rentBikeInfo: {}
         })
+        // this.getBikeRentHistory()
         history.push('/rental-review')
-        this.getBikeRentHistory()
       })
 
   }
@@ -154,6 +142,7 @@ export default class App extends Component {
   }
 
   handleLogin(data) {
+    // this.getBikeRentHistory()
     this.setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user
@@ -244,8 +233,8 @@ export default class App extends Component {
                   <MyInfo
                     {...props}
                     currentUser={this.state.user}
-                    myRentals={this.state.myRentals}
-                    getBikeRentHistory={this.getBikeRentHistory}
+                    // myRentals={this.state.myRentals}
+                    // getBikeRentHistory={this.getBikeRentHistory}
                   />
                 )}
               />
