@@ -15,7 +15,7 @@ export default class Home extends Component {
       showReg: false
     }
 
-    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+    // this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
   componentDidMount(){
@@ -26,12 +26,12 @@ export default class Home extends Component {
 
 
 
-  handleSuccessfulAuth(data) {
-    this.props.handleLogin(data);
-    this.props.history.push("/dashboard");
-    document.body.style.backgroundImage = ""
+  // handleSuccessfulAuth(data) {
+  //   this.props.handleLogin(data);
+  //   document.body.style.backgroundImage = ""
+  //   this.props.history.push("/dashboard");
 
-  }
+  // }
 
 
 
@@ -64,8 +64,7 @@ export default class Home extends Component {
       <div>
         {this.setHomeImg()}
         <h1 id="moto">moto<mark className='green'>GO</mark></h1>
-        {this.state.showReg  ? <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} /> : 
-        <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />}      
+        <Login handleSuccessfulAuth={this.props.handleSuccessfulAuth} />     
       </div>
     )
 

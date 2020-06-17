@@ -12,6 +12,7 @@ import RentBikeForm from "./RentBikeForm"
 import RentalConfirmationPage from './RentalConfirmationPage'
 
 import { createBrowserHistory } from 'history'
+import MyInfo from "./MyInfo";
 const history = createBrowserHistory();
 
 export default class App extends Component {
@@ -25,10 +26,11 @@ export default class App extends Component {
       rentBikeInfo: {},
       confirmRentalInfo: {},
       startDate: "",
-      endDate: ""
-      
+      endDate: "",
+      myRentals: []
+
     };
-    
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.postRentBike = this.postRentBike.bind(this)
@@ -79,7 +81,19 @@ export default class App extends Component {
 
   componentDidMount() {
     this.checkLoginStatus();
+    if(this.state.loggedInStatus === "LOGGED_IN"){
+    // this.getBikeRentHistory()
+    }
+  }
 
+  getBikeRentHistory(){
+    axios.get("http://localhost:3001/bike_rent_history", { withCredentials: true })
+        .then(resp => {
+            console.log(resp)
+            this.setState({
+                myRentals: [...resp.data]
+            })
+        })
   }
 
   handleSelectStartDate = e => {
@@ -90,6 +104,7 @@ export default class App extends Component {
       startDate: date
     })
   }
+
   handleSelectEndDate = e => {
     e.preventDefault()
     console.log("Made it into the handleSelectEndDate()", e.target.value)
@@ -113,13 +128,20 @@ export default class App extends Component {
     })
       .then(resp => {
         console.log(resp.data)
-          this.setState({
-            confirmRentalInfo: { ...resp.data },
-            rentBikeInfo: {}
-          })
-          history.push('/rental-review')
-      
+        this.setState({
+          confirmRentalInfo: { ...resp.data },
+          rentBikeInfo: {}
+        })
+        history.push('/rental-review')
+        this.getBikeRentHistory()
       })
+
+  }
+
+  handleSuccessfulAuth(data) {
+    this.handleLogin(data);
+    document.body.style.backgroundImage = ""
+    history.push("/dashboard");
 
   }
 
@@ -164,6 +186,7 @@ export default class App extends Component {
                 render={props => (
                   <Home
                     {...props}
+                    handleSuccessfulAuth={this.handleSuccessfulAuth}
                     handleLogin={this.handleLogin}
                     handleLogout={this.handleLogout}
                     currentUser={this.state.user}
@@ -214,6 +237,18 @@ export default class App extends Component {
                   />
                 )}
               />
+              <Route
+                exact
+                path={"/my-info"}
+                render={props => (
+                  <MyInfo
+                    {...props}
+                    currentUser={this.state.user}
+                    myRentals={this.state.myRentals}
+                    getBikeRentHistory={this.getBikeRentHistory}
+                  />
+                )}
+              />
 
               <Route
                 exact
@@ -233,6 +268,7 @@ export default class App extends Component {
                   <Registration
                     {...props}
                     loggedInStatus={this.state.loggedInStatus}
+                    handleSuccessfulAuth={this.handleSuccessfulAuth}
                   />
                 )}
               />

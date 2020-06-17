@@ -59,6 +59,8 @@ class TopNav extends Component {
                                 <li><a href="/post-my-bike">Post My Bike</a></li>}
                                 {this.props.currentUser.id ?
                                 <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li> : null}
+                                {this.props.currentUser.id ? 
+                                <li><a onClick={this.props.getBikeRentHistory} href="/my-info">My Info</a></li> : null}
                             </ul>
                         </nav>
 

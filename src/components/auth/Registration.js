@@ -17,7 +17,7 @@ export default class Registration extends Component {
       zip_code: "",
       phone_number: "",
       ip_address: "",
-      avatar: "",
+      avatar_url: "",
       registrationErrors: ""
     };
 
@@ -31,65 +31,65 @@ export default class Registration extends Component {
     });
   }
 
-  // handleSubmit(event) {
-  //   const { first_name, last_name, email, password, password_confirmation, street, city, state, zip_code, phone_number, ip_address, avatar } = this.state;
+  handleSubmit = (event) => {
+    const { first_name, last_name, email, password, password_confirmation, street, city, state, zip_code, phone_number, ip_address, avatar_url} = this.state;
 
-  //   axios
-  //     .post(
-  //       "http://localhost:3001/registrations",
-  //       {
-  //         user: {
-  //           first_name: first_name,
-  //           last_name: last_name,
-  //           email: email,
-  //           password: password,
-  //           password_confirmation: password_confirmation,
-  //           street: street,
-  //           city: city,
-  //           state: state,
-  //           zip_code: zip_code,
-  //           phone_number: phone_number,
-  //           ip_address: ip_address,
-  //           avatar: avatar
-  //         }
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then(response => {
-  //       if (response.data.status === "created") {
-  //         this.props.handleSuccessfulAuth(response.data);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.log("registration error", error);
-  //     });
-  //   event.preventDefault();
-  // }
-
-  handleSubmit = event => {
+    axios
+      .post(
+        "http://localhost:3001/registrations",
+        {
+          user: {
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+            street: street,
+            city: city,
+            state: state,
+            zip_code: zip_code,
+            phone_number: phone_number,
+            ip_address: ip_address,
+            avatar_url: avatar_url
+          }
+        },
+        { withCredentials: true }
+      )
+      .then(response => {
+        if (response.data.status === "created") {
+          this.props.handleSuccessfulAuth(response.data);
+        }
+      })
+      .catch(error => {
+        console.log("registration error", error);
+      });
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('first_name', this.state.first_name);
-    formData.append('last_name', this.state.last_name);
-    formData.append('email', this.state.email);
-    formData.append('password', this.state.password);
-    formData.append('password_confirmation', this.state.password_confirmation);
-    formData.append('street', this.state.street);
-    formData.append('city', this.state.city);
-    formData.append('state', this.state.state);
-    formData.append('zip_code', this.state.zip_code);
-    formData.append('phone_number', this.state.phone_number);
-    formData.append('avatar', this.state.avatar);
-
-
-    fetch('http://localhost:3001/registrations', {
-      method: 'POST',
-      body: formData
-    })
-      .catch(error => console.log(error));
-
-
   }
+
+  // handleSubmit = event => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('first_name', this.state.first_name);
+  //   formData.append('last_name', this.state.last_name);
+  //   formData.append('email', this.state.email);
+  //   formData.append('password', this.state.password);
+  //   formData.append('password_confirmation', this.state.password_confirmation);
+  //   formData.append('street', this.state.street);
+  //   formData.append('city', this.state.city);
+  //   formData.append('state', this.state.state);
+  //   formData.append('zip_code', this.state.zip_code);
+  //   formData.append('phone_number', this.state.phone_number);
+  //   formData.append('avatar', this.state.avatar);
+
+
+  //   fetch('http://localhost:3001/registrations', {
+  //     method: 'POST',
+  //     body: formData
+  //   })
+  //     .catch(error => console.log(error));
+
+
+  // }
 
     handleImageChange = event => {
       this.setState({ avatar: event.target.files[0] });
@@ -202,7 +202,13 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
-            <input type="file" accept="image/*" multiple={false} onChange={this.handleImageChange}
+            {/* <input type="file" accept="image/*" multiple={false} onChange={this.handleImageChange} */}
+            <input
+              type="avatar"
+              name="avatar_url"
+              placeholder="Avatar URL"
+              value={this.state.avatar_url}
+              onChange={this.handleChange}
             />
 
             <button type="submit">Register</button>
