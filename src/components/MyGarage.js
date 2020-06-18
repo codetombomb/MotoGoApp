@@ -70,7 +70,7 @@ class MyGarage extends Component {
                     }}>My Bikes</h1>
 
                     {this.state.myBikes.length > 0 ? this.renderMyBikes() : <h2>I do not have any bikes listed on MotoGO</h2>}
-                    <hr/>
+                    <hr style={{position: "relative", left: "-30px"}}/>
                     <h1 style={{
                         fontSize: "40px",
                         position: "relative",

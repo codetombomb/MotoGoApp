@@ -39,6 +39,7 @@ class CreateBikePost extends Component {
 
 
     handleSubmit = event => {
+        
         const { year, make, model, miles, license_plate, bike_name, category, cost_per_day, description } = this.state
         axios
             .post(
@@ -71,6 +72,7 @@ class CreateBikePost extends Component {
         this.setState({
             showBike: !this.state.showBike
         })
+        document.body.style.backgroundImage = ""
     }   
 
     setBG(){
