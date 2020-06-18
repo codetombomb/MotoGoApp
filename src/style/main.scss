@@ -31,7 +31,7 @@ mark.green {
 }
 
 .postShowImg {
-   width: 50%;
+   width: 40%;
    padding: 20px;
    margin-top: 40px;
 }
@@ -110,6 +110,7 @@ header::after {
 
 #navbar {
     overflow: hidden;  
+    z-index: 5
 }
 
 .sticky {
@@ -122,8 +123,14 @@ header::after {
     float: right;
     position: relative;
     top: 100px;
-    left: -160px;
+    left: -240px;
+    max-width: 600px;
 
+}
+.bike-info-div {
+    position: relative;
+    padding: 25px;
+    max-width: 400px;
 }
 
 .navbar-logo {

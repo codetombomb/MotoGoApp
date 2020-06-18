@@ -13,7 +13,6 @@ class MyGarage extends Component {
         axios.get("http://localhost:3001/my_bikes_history", { withCredentials: true })
             .then(resp => {
                 console.log(resp)
-                // debugger
                 this.setState({
                     myBikeHistory: [...resp.data.my_bike_posts]
                 })
@@ -21,8 +20,25 @@ class MyGarage extends Component {
     }
 
     renderMyBikes(){
-        return this.state.myBikeHistory.map(bike => {
-            return <MyBikeCard key={bike.bike.created_at} bikeInfo={bike.bike} postInfo={bike.post} renterInfo={bike.renter} renterPost={bike.renter_post} />
+        return this.state.myBikeHistory.map((bike,index) => {
+
+            return <MyBikeCard 
+            key={index} 
+            bikeInfo={bike.bike} 
+            //renter stuff
+            renterAvatar={bike.renter.avatar_url}
+            renterFirstName={bike.renter.first_name}
+            renterLastName={bike.renter.last_name}
+            renterAddress={bike.renter.address}
+            renterCity={bike.renter.city}
+            renterEmail={bike.renter.email}
+            renterPhone={bike.renter.phone_number}
+            //post stuff
+            postStartDate={bike.renter_post.start_date}
+            postEndDate={bike.renter_post.end_date}
+            postCost={bike.post.price_per_day}
+            
+            />
         })
     }
 
@@ -37,7 +53,11 @@ class MyGarage extends Component {
                     top: "30px",
                     left: "30px"
                 }}>
-                    <h1>My Bikes</h1>
+                    <h1 style={{
+                        fontSize: "40px",
+                        position: "relative",
+                        left: '50px'
+                    }}>My Bikes</h1>
                     {this.renderMyBikes()}
                 </div>
             </div>
