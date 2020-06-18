@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import PostShowPage from './PostShowPage'
+import AddBikePic from '../style/images/add_bike.jpg'
 
 class CreateBikePost extends Component {
     constructor(props) {
@@ -72,9 +73,14 @@ class CreateBikePost extends Component {
         })
     }   
 
+    setBG(){
+        document.body.style.backgroundImage = `url('${AddBikePic}')`
+    }
+
     render() {
         return (
             <div>
+                {this.setBG()}
                 {this.state.showBike ? 
                 <PostShowPage 
                 year={this.state.year}
@@ -86,8 +92,13 @@ class CreateBikePost extends Component {
                 
                 /> : 
                 <form onSubmit={this.handleSubmit} className="createBike">
+                    <h1 style={{color: 'white', fontSize: "45px"}}>Add my bike</h1>
+                    <br/>
+                    <br/>
+                    <h3 style={{color: 'white'}}>Adding your bike will allow you to post it for rent. Once your bike is added, it will appear in MY GARAGE.</h3>
 
                     <input
+                        className='create-bike-input'
                         type="year"
                         name="year"
                         placeholder="Year"
@@ -95,8 +106,10 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                         required
                     />
-
+                    <br/>
+                    <br/>
                     <select
+                    className='create-bike-input'
                         type="make"
                         name="make"
                         // defaultValue="AJS"
@@ -155,8 +168,11 @@ class CreateBikePost extends Component {
                         <option value="Custom">Custom</option>
                         <option value="Other">Other</option>
                     </select>
+                    <br/>
+                    <br/>
 
                     <input
+                    className='create-bike-input'
                         type="model"
                         name="model"
                         placeholder="Model"
@@ -164,8 +180,11 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                         required
                     />
+                    <br/>
+                    <br/>
 
                     <input
+                    className='create-bike-input'
                         type="miles"
                         name="miles"
                         placeholder="Miles"
@@ -173,8 +192,11 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                         required
                     />
+                    <br/>
+                    <br/>
 
                     <input
+                    className='create-bike-input'
                         type="license_plate"
                         name="license_plate"
                         placeholder="License Plate No."
@@ -182,7 +204,10 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                         required
                     />
+                    <br/>
+                    <br/>
                     <select
+                    className='create-bike-input'
                         type="category"
                         name="category"
                         // defaultValue="Scooter"
@@ -204,8 +229,11 @@ class CreateBikePost extends Component {
                         <option value="Other">Other</option>
 
                     </select>
+                    <br/>
+                    <br/>
                    
                     <input
+                    className='create-bike-input'
                         type="bike_name"
                         name="bike_name"
                         placeholder="Bike Name"
@@ -213,9 +241,12 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                     // required
                     />
+                    <br/>
+                    <br/>
 
 
                     <input
+                    className='create-bike-input'
                         type="number"
                         name="cost_per_day"
                         placeholder="Price/Day"
@@ -224,16 +255,23 @@ class CreateBikePost extends Component {
                         onChange={this.handleChangeBikeState}
                     required
                     />
+                    <br/>
+                    <br/>
 
                     <textarea
+                    className='create-bike-input'
                         type="text"
                         name="description"
                         placeholder="Give your bike an awesome description! Why should people want to rent this bike?"
                         value={this.state.description}
                         onChange={this.handleChangeBikeState}
                     />
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
 
-                    <button type="submit">Submit</button>
+                    <button className='create-bike-input' type="submit">Submit</button>
 
                 </form>
     }

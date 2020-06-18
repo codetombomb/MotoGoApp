@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import MyBikeCard from './MyBikeCard';
+import BikeCard from './BikeCard';
 
 class MyGarage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            myBikeHistory: []
+            myBikeHistory: [],
+            myBikes: []
         }
     }
     componentDidMount() {
@@ -14,12 +16,13 @@ class MyGarage extends Component {
             .then(resp => {
                 console.log(resp)
                 this.setState({
-                    myBikeHistory: [...resp.data.my_bike_posts]
+                    myBikeHistory: [...resp.data.my_bike_posts],
+                    myBikes: [...resp.data.my_bikes]
                 })
             })
     }
 
-    renderMyBikes(){
+    renderMyRentedBikes(){
         return this.state.myBikeHistory.map((bike,index) => {
 
             return <MyBikeCard 
@@ -42,6 +45,12 @@ class MyGarage extends Component {
         })
     }
 
+    renderMyBikes(){
+        return this.state.myBikes.map(bike => {
+           return <BikeCard key={bike.created_at} bikeName={bike.bike_name} bikeYear={bike.year} bikeMake={bike.make} bikeModel={bike.model}/>
+        })
+    }
+
 
 
     render() {
@@ -56,9 +65,19 @@ class MyGarage extends Component {
                     <h1 style={{
                         fontSize: "40px",
                         position: "relative",
-                        left: '50px'
+                        left: '50px',
+                        textDecoration: "underline"
                     }}>My Bikes</h1>
-                    {this.renderMyBikes()}
+
+                    {this.state.myBikes.length > 0 ? this.renderMyBikes() : <h2>I do not have any bikes listed on MotoGO</h2>}
+                    <hr/>
+                    <h1 style={{
+                        fontSize: "40px",
+                        position: "relative",
+                        left: '50px',
+                        textDecoration: "underline"
+                    }}>My Bike's Rental History</h1>
+                    {this.state.myBikeHistory.length > 0 ? this.renderMyRentedBikes() : <h2>My bikes have not been rented yet.</h2>}
                 </div>
             </div>
         )

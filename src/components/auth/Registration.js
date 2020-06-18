@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SignUpImg from '../../style/images/signup-bg.jpg'
+import BikeCard from "../BikeCard";
 
 export default class Registration extends Component {
   constructor(props) {
@@ -119,8 +120,10 @@ export default class Registration extends Component {
       return (
         <div>
           {this.setSignUpImg()}
-          <form onSubmit={this.handleSubmit} className="login-form" id="registration-form">
+          <form onSubmit={this.handleSubmit} className="signup-form" id="registration-form">
+            <h1 style={{color: 'white'}}>Sign Up</h1>
             <input
+              className="su-form-input"
               type="first_name"
               name="first_name"
               placeholder="First Name"
@@ -128,7 +131,10 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
             <input
+            className="su-form-input"
               type="last_name"
               name="last_name"
               placeholder="Last Name"
@@ -136,8 +142,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="email"
               name="email"
               placeholder="Email"
@@ -145,8 +154,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="password"
               name="password"
               placeholder="Password"
@@ -154,8 +166,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="password"
               name="password_confirmation"
               placeholder="Password confirmation"
@@ -163,8 +178,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="street"
               name="street"
               placeholder="Street Address"
@@ -172,8 +190,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="city"
               name="city"
               placeholder="City"
@@ -181,8 +202,10 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
-
+            <br/>
+            <br/>
             <input
+            className="su-form-input"
               type="state"
               name="state"
               placeholder="State"
@@ -190,8 +213,11 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
 
             <input
+            className="su-form-input"
               type="zip_code"
               name="zip_code"
               placeholder="Zip Code"
@@ -199,8 +225,10 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
-
+            <br/>
+            <br/>
             <input
+            className="su-form-input"
               type="tel"
               name="phone_number"
               placeholder="Phone Number"
@@ -208,16 +236,22 @@ export default class Registration extends Component {
               onChange={this.handleChange}
               required
             />
+            <br/>
+            <br/>
             {/* <input type="file" accept="image/*" multiple={false} onChange={this.handleImageChange} */}
             <input
+            className="su-form-input"
               type="avatar"
               name="avatar_url"
               placeholder="Avatar URL"
               value={this.state.avatar_url}
               onChange={this.handleChange}
             />
-
-            <button type="submit">Register</button>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <button className="su-form-input" type="submit">Submit</button>
           </form>
         </div>
       );

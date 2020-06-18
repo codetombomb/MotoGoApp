@@ -31,9 +31,10 @@ mark.green {
 }
 
 .postShowImg {
-   width: 40%;
-   padding: 20px;
-   margin-top: 40px;
+   width: 37%;
+   padding: 25px;
+   position: relative;
+   top: 90px;
 }
 
 .bikeShowDesc {
@@ -61,15 +62,25 @@ mark.green {
 }
 
 .createBike {
-    background-color: rgba(39, 39, 38, 0.7);
-    border-radius: 25px;
-    height: 150px;
-    width: 300px;
-    margin-top: 200px;
-    margin-left: 75px;
-    padding-top: 50px;
-    padding: 20px; 
+    position: relative;
+    left: 300px;
+    top: 187px;
+    padding: 20px;
+    width: 500px;
+    height: 675px;
+    background-color: rgba(0, 0, 0, 0.808);
 }
+
+.create-bike-input{
+    background-color: rgb(252, 252, 252);
+    width: 485px;
+    height: 25px;
+    padding: 5px;
+    position: relative;
+    top: 40px;
+    
+}
+
 
 .login-input {
     margin-left: 35px;
@@ -119,12 +130,32 @@ header::after {
     width: 100%;
 }
 
+.signup-form{
+    position: relative;
+    left: 900px;
+    top: 85px;
+    padding: 20px;
+    width: 500px;
+    height: 675px;
+    background-color: rgba(0, 0, 0, 0.808);
+}
+.su-form-input{
+    background-color: rgb(252, 252, 252);
+    width: 485px;
+    height: 25px;
+    padding: 5px;
+    position: relative;
+    top: 20px;
+}
+
+
 .rent-form {
     float: right;
     position: relative;
-    top: 100px;
-    left: -240px;
+    top: 200px;
+    left: -440px;
     max-width: 600px;
+    
 
 }
 .bike-info-div {

@@ -56,7 +56,7 @@ class TopNav extends Component {
                                 <li><a href="/dashboard">Dashboard</a></li>
                                 {!this.props.currentUser.id ?
                                     <li><a href="/sign-up">Sign Up</a></li> :
-                                    <li><a href="/post-my-bike">Post My Bike</a></li>}
+                                    <li><a href="/post-my-bike">Add My Bike</a></li>}
                                 {this.props.currentUser.id ?
                                     <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li> : null}
                                 {this.props.currentUser.id ?
