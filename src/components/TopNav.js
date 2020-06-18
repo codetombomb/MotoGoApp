@@ -64,6 +64,9 @@ class TopNav extends Component {
                                 {this.props.currentUser.id ?
                                 <li><a href="/my-garage">My Garage</a></li> : null}
 
+                                {this.props.currentUser.id ?
+                                <li><h3 style={{color: 'white'}}>Money Made: ${this.props.currentUser.money_made}</h3></li> : null}
+
                             </ul>
                         </nav>
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 const RentBikePage = (props) => {
-    const [showForm, setToggleForm] = useState(false);
+    // const [showForm, setToggleForm] = useState(false);
  
 
 

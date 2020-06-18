@@ -104,12 +104,15 @@ export default class App extends Component {
   }
 
   postRentBike(e) {
+    debugger
     e.preventDefault();
     const formData = {
+      owner_id: this.state.rentBikeInfo.owner.id,
       renter_id: this.state.user.id,
       post_id: this.state.rentBikeInfo.id,
       start_date: this.state.startDate,
       end_date: this.state.endDate,
+      price_per_day: this.state.rentBikeInfo.price_per_day,
       status: "Rented"
     }
     axios.post("http://localhost:3001/renter_posts", {
@@ -117,6 +120,7 @@ export default class App extends Component {
     })
       .then(resp => {
         console.log(resp.data)
+        debugger
         this.setState({
           confirmRentalInfo: { ...resp.data },
           rentBikeInfo: {}
