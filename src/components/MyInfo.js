@@ -30,7 +30,7 @@ class MyInfo extends Component {
     renderRentHistoryCard() {
         return this.state.myRentedBikes.map(rb => {
             // debugger
-            return <RentHistoryCard key={rb.renter_post.created_at} ownerInfo={rb.owner} bikeInfo={rb.bike} renterPost={rb.renter_post}  />
+            return <RentHistoryCard key={rb.renter_post.created_at} ownerInfo={rb.owner} bikeInfo={rb.bike} renterPost={rb.renter_post} />
         })
     }
 
@@ -39,15 +39,19 @@ class MyInfo extends Component {
         // const myRentals = this.state.myRentals
         return (
             <div>
-                <h1>My Info:</h1>
-                <img alt="avatar" src={this.props.currentUser.avatar_url} />
-                <h3>Name: {this.props.currentUser.first_name} {this.props.currentUser.last_name}</h3>
-                <h3>Address: {this.props.currentUser.address} {this.props.currentUser.city}, {this.props.currentUser.state} {this.props.currentUser.zip_code}</h3>
-                <h3>Phone: {this.props.currentUser.phone_number}</h3>
-                <h3>Email:{this.props.currentUser.email}</h3>
-                <button>Edit</button>
+                <div style={{padding: "25px", position: "relative", top: "35px"}}>
+                    <h1>My Info:</h1>
+                    <img alt="avatar" src={this.props.currentUser.avatar_url} />
+                    <h3>Name: {this.props.currentUser.first_name} {this.props.currentUser.last_name}</h3>
+                    <h3>Address: {this.props.currentUser.address} {this.props.currentUser.city}, {this.props.currentUser.state} {this.props.currentUser.zip_code}</h3>
+                    <h3>Phone: {this.props.currentUser.phone_number}</h3>
+                    <h3>Email:{this.props.currentUser.email}</h3>
+                    <button>Edit</button>
+                    <br />
+                </div>
                 <br />
-                <h1>Bikes that I have rented:</h1>
+                <br />
+                <h1 style={{fontSize: "40px", position: "relative", left: "35px"}}>Bikes that I have rented:</h1>
                 {this.renderRentHistoryCard()}
 
             </div>

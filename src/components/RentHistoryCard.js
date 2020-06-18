@@ -8,7 +8,7 @@ class RentHistoryCard extends Component {
         return (
             <div>
                 <div style={{
-                    padding: "30px"
+                    padding: "35px"
                 }}>
                     <hr/>
                     <img style={{

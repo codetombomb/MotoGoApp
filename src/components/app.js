@@ -10,6 +10,7 @@ import Registration from "./auth/Registration";
 import RentBikePage from "./RentBikePage";
 import RentBikeForm from "./RentBikeForm"
 import RentalConfirmationPage from './RentalConfirmationPage'
+import MyGarage from './MyGarage'
 
 import { createBrowserHistory } from 'history'
 import MyInfo from "./MyInfo";
@@ -233,8 +234,16 @@ export default class App extends Component {
                   <MyInfo
                     {...props}
                     currentUser={this.state.user}
-                    // myRentals={this.state.myRentals}
-                    // getBikeRentHistory={this.getBikeRentHistory}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path={"/my-garage"}
+                render={props => (
+                  <MyGarage
+                    {...props}
+                    currentUser={this.state.user}
                   />
                 )}
               />
