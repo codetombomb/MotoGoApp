@@ -30,18 +30,18 @@ class TopNav extends Component {
         return (
             <div className="sticky" id="navbar">
                 <header>
-                    {this.props.currentUser.id ? 
-                    <img
-                        className="user-img"
-                        alt="avatar"
-                        src={this.props.currentUser.avatar_url}
-                    />
-                    :
-                    <img
-                        className="user-img"
-                        alt="avatar"
-                        src="https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
-                    />
+                    {this.props.currentUser.id ?
+                        <img
+                            className="user-img"
+                            alt="avatar"
+                            src={this.props.currentUser.avatar_url}
+                        />
+                        :
+                        <img
+                            className="user-img"
+                            alt="avatar"
+                            src="https://i0.wp.com/ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png?fit=204%2C204"
+                        />
                     }
                     <div className="container">
                         <img className="navbar-logo" alt="logo" src={MotoLogo} />
@@ -51,16 +51,19 @@ class TopNav extends Component {
 
                         <nav>
                             <ul>
-                                {!this.props.currentUser.id ? 
-                                <li><a href="/">Home</a></li> : null}
+                                {!this.props.currentUser.id ?
+                                    <li><a href="/">Home</a></li> : null}
                                 <li><a href="/dashboard">Dashboard</a></li>
-                                {!this.props.currentUser.id ? 
-                                <li><a href="/sign-up">Sign Up</a></li> : 
-                                <li><a href="/post-my-bike">Post My Bike</a></li>}
+                                {!this.props.currentUser.id ?
+                                    <li><a href="/sign-up">Sign Up</a></li> :
+                                    <li><a href="/post-my-bike">Post My Bike</a></li>}
                                 {this.props.currentUser.id ?
-                                <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li> : null}
-                                {this.props.currentUser.id ? 
-                                <li><a onClick={this.props.getBikeRentHistory} href="/my-info">My Info</a></li> : null}
+                                    <li><a onClick={this.handleLogoutClick} href="/">Logout</a></li> : null}
+                                {this.props.currentUser.id ?
+                                    <li><a href="/my-info">My Info</a></li> : null}
+                                {this.props.currentUser.id ?
+                                <li><a href="/my-garage">My Garage</a></li> : null}
+
                             </ul>
                         </nav>
 
