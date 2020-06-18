@@ -27,10 +27,7 @@ class RentalConfirmationPage extends Component {
                     left: "75px",
                     top: '40px'
                 }} >
-                    <div style={{
-                        position: "relative",
-                        padding: "20px"
-                    }}>
+                    <div className="bike-info-div">
                         <h1>Bike Information</h1>
                         <h3>Year: {this.props.rentalDetails.bike.year}</h3>
                         <h3>Make: {this.props.rentalDetails.bike.make}</h3>

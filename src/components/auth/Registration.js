@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import SignUpImg from '../../style/images/signup-bg.jpg'
 
 export default class Registration extends Component {
   constructor(props) {
@@ -109,10 +110,15 @@ export default class Registration extends Component {
           })
         })
     }
+    setSignUpImg() {
+      document.body.style.backgroundImage = `url('${SignUpImg}')`
+    }
+  
 
     render() {
       return (
         <div>
+          {this.setSignUpImg()}
           <form onSubmit={this.handleSubmit} className="login-form" id="registration-form">
             <input
               type="first_name"

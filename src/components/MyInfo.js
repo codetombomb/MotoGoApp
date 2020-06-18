@@ -46,6 +46,7 @@ class MyInfo extends Component {
                     <h3>Address: {this.props.currentUser.address} {this.props.currentUser.city}, {this.props.currentUser.state} {this.props.currentUser.zip_code}</h3>
                     <h3>Phone: {this.props.currentUser.phone_number}</h3>
                     <h3>Email:{this.props.currentUser.email}</h3>
+                    <br />
                     <button>Edit</button>
                     <br />
                 </div>
