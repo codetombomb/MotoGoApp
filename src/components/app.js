@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Switch, Route, Redirect } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 
 import Home from "./Home";
@@ -27,9 +27,7 @@ export default class App extends Component {
       rentBikeInfo: {},
       confirmRentalInfo: {},
       startDate: "",
-      endDate: "",
-      // myRentals: []
-
+      endDate: ""
     };
     this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -73,21 +71,17 @@ export default class App extends Component {
   }
 
   handleBikeMapMarkerClick = (info) => {
-    console.log("clicked bike", info)
     this.setState({
       rentBikeInfo: { ...info }
     })
   }
 
-
   componentDidMount() {
     this.checkLoginStatus();
   }
 
- 
   handleSelectStartDate = e => {
     e.preventDefault()
-    console.log("Made it into the handleSelectStartDate()", e.target.value)
     let date = e.target.value
     this.setState({
       startDate: date
@@ -96,7 +90,6 @@ export default class App extends Component {
 
   handleSelectEndDate = e => {
     e.preventDefault()
-    console.log("Made it into the handleSelectEndDate()", e.target.value)
     let date = e.target.value
     this.setState({
       endDate: date
@@ -104,7 +97,6 @@ export default class App extends Component {
   }
 
   postRentBike(e) {
-    debugger
     e.preventDefault();
     const formData = {
       owner_id: this.state.rentBikeInfo.owner.id,
@@ -119,13 +111,10 @@ export default class App extends Component {
       rent_info: formData
     })
       .then(resp => {
-        console.log(resp.data)
-        debugger
         this.setState({
           confirmRentalInfo: { ...resp.data },
           rentBikeInfo: {}
         })
-        // this.getBikeRentHistory()
         history.push('/rental-review')
       })
 
@@ -135,9 +124,7 @@ export default class App extends Component {
     this.handleLogin(data);
     document.body.style.backgroundImage = ""
     history.push("/dashboard");
-
   }
-
 
   handleLogout() {
     this.setState({
@@ -147,14 +134,11 @@ export default class App extends Component {
   }
 
   handleLogin(data) {
-    // this.getBikeRentHistory()
     this.setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user
     });
   }
-
-
   render() {
     return (
       <div className="app">

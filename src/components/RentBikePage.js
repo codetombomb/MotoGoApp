@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
-const RentBikePage = (props) => {
-    // const [showForm, setToggleForm] = useState(false);
- 
-
-
+function RentBikePage(props) {
     return (
         <div>
             <img className="postShowImg" src="https://thumpertalk.com/applications/core/interface/imageproxy/imageproxy.php?img=http://www.zeta-racing.com/bikes/images/drz/pz04.jpg&key=c5a35e44fa9087e1d4b2c043c44ad31aebacf93a990c19b99211306a8adb18c3" alt="Avatar" />
@@ -27,6 +23,5 @@ const RentBikePage = (props) => {
             <button onClick={props.handleClickRent(props)}>Rent Bike</button>
         </div>
     )
-
 }
 export default RentBikePage;
