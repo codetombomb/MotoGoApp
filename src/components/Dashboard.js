@@ -3,10 +3,6 @@ import BikeMapTwo from './BikeMapTwo'
 import PostCard from './PostCard'
 import Select from 'react-select'
 import axios from 'axios'
-import RentBikePage from './RentBikePage'
-import RentalConfirmationPage from './RentalConfirmationPage'
-import { Redirect } from 'react-router';
-
 
 const options = [
   { value: "none", label: "none" },
@@ -23,8 +19,6 @@ class Dashboard extends Component {
       posts: [],
       searchFilter: "none"
     }
-
-    // this.handleFilterSelection = this.handleFilterSelection.bind(this)
     this.getAllPosts = this.getAllPosts.bind(this)
 
   }
@@ -33,16 +27,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.getAllPosts()
-    // this.checkForConfirmation()
   }
-  
-  // checkForConfirmation(){
-  //   if(this.props.confirmRentalInfo.id){
-  //     debugger
-  //     this.props.history.push("/rental-review")
-  //   }
-  // }
-
 
   getAllPosts() {
     axios
@@ -71,38 +56,8 @@ class Dashboard extends Component {
 
 
   render() {
-    let searchFilter = this.state.searchFilter
-    let posts
-    if (searchFilter === "none") {
-      posts = this.state.posts.map(post => {
-        return <PostCard 
-        key={post.id} 
-        postInfo={post}
-        handlePostCardClick={this.props.handlePostCardClick} />
-      })
-    } else if (searchFilter === "Make") {
-      console.log("filter changed to", searchFilter)
-      let filtered = []
-      this.props.posts.sort((postA, postB) => {
-        if (postA.bike.make < postB.bike.make) {
-          filtered.push(postA)
-        } else if (postA.bike.make < postB.bike.make) {
-          filtered.push(postA)
-        }
-      })
-      console.log(filtered)
-      return filtered.map(post => {
-        return <PostCard key={post.id} postInfo={post} />
-      })
-
-    } else if (searchFilter === "Model") {
-      console.log("filter changed to", searchFilter)
-    } else if (searchFilter === "Location") {
-      console.log("filter changed to", searchFilter)
-    }
     return (
       <div>
-      {/* {this.props.confirmRentalInfo.id ? <Redirect to="/rental-review"/> : null} */}
         {this.setBackgroundColor()}
         <br />
         <br />
@@ -121,7 +76,7 @@ class Dashboard extends Component {
           handleBikeMapMarkerClick={this.props.handleBikeMapMarkerClick}
           history={this.props.history}
         />
-    
+
         {posts}
       </div>
     )

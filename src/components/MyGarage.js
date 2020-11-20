@@ -22,32 +22,30 @@ class MyGarage extends Component {
             })
     }
 
-    renderMyRentedBikes(){
-        return this.state.myBikeHistory.map((bike,index) => {
+    renderMyRentedBikes() {
+        return this.state.myBikeHistory.map((bike, index) => {
 
-            return <MyBikeCard 
-            key={index} 
-            bikeInfo={bike.bike} 
-            //renter stuff
-            renterAvatar={bike.renter.avatar_url}
-            renterFirstName={bike.renter.first_name}
-            renterLastName={bike.renter.last_name}
-            renterAddress={bike.renter.address}
-            renterCity={bike.renter.city}
-            renterEmail={bike.renter.email}
-            renterPhone={bike.renter.phone_number}
-            //post stuff
-            postStartDate={bike.renter_post.start_date}
-            postEndDate={bike.renter_post.end_date}
-            postCost={bike.post.price_per_day}
-            
+            return <MyBikeCard
+                key={index}
+                bikeInfo={bike.bike}
+                renterAvatar={bike.renter.avatar_url}
+                renterFirstName={bike.renter.first_name}
+                renterLastName={bike.renter.last_name}
+                renterAddress={bike.renter.address}
+                renterCity={bike.renter.city}
+                renterEmail={bike.renter.email}
+                renterPhone={bike.renter.phone_number}
+                postStartDate={bike.renter_post.start_date}
+                postEndDate={bike.renter_post.end_date}
+                postCost={bike.post.price_per_day}
+
             />
         })
     }
 
-    renderMyBikes(){
+    renderMyBikes() {
         return this.state.myBikes.map(bike => {
-           return <BikeCard key={bike.created_at} bikeName={bike.bike_name} bikeYear={bike.year} bikeMake={bike.make} bikeModel={bike.model}/>
+            return <BikeCard key={bike.created_at} bikeName={bike.bike_name} bikeYear={bike.year} bikeMake={bike.make} bikeModel={bike.model} />
         })
     }
 
@@ -70,7 +68,7 @@ class MyGarage extends Component {
                     }}>My Bikes</h1>
 
                     {this.state.myBikes.length > 0 ? this.renderMyBikes() : <h2>I do not have any bikes listed on MotoGO</h2>}
-                    <hr style={{position: "relative", left: "-30px"}}/>
+                    <hr style={{ position: "relative", left: "-30px" }} />
                     <h1 style={{
                         fontSize: "40px",
                         position: "relative",

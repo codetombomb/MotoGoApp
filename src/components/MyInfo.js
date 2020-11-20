@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import RentHistoryCard from './RentHistoryCard';
-// import RentHistoryCard from './RentHistoryCard';
 
 
 
@@ -18,8 +17,6 @@ class MyInfo extends Component {
     componentDidMount() {
         axios.get("http://localhost:3001/bike_rent_history", { withCredentials: true })
             .then(resp => {
-                console.log(resp)
-                // debugger
                 this.setState({
                     myRentedBikes: [...resp.data.my_rented_bikes]
                 })
@@ -29,17 +26,15 @@ class MyInfo extends Component {
 
     renderRentHistoryCard() {
         return this.state.myRentedBikes.map(rb => {
-            // debugger
             return <RentHistoryCard key={rb.renter_post.created_at} ownerInfo={rb.owner} bikeInfo={rb.bike} renterPost={rb.renter_post} />
         })
     }
 
 
     render() {
-        // const myRentals = this.state.myRentals
         return (
             <div>
-                <div style={{padding: "25px", position: "relative", top: "35px"}}>
+                <div style={{ padding: "25px", position: "relative", top: "35px" }}>
                     <h1>My Info:</h1>
                     <img alt="avatar" src={this.props.currentUser.avatar_url} />
                     <h3>Name: {this.props.currentUser.first_name} {this.props.currentUser.last_name}</h3>
@@ -52,9 +47,8 @@ class MyInfo extends Component {
                 </div>
                 <br />
                 <br />
-                <h1 style={{fontSize: "40px", position: "relative", left: "35px"}}>Bikes that I have rented:</h1>
+                <h1 style={{ fontSize: "40px", position: "relative", left: "35px" }}>Bikes that I have rented:</h1>
                 {this.renderRentHistoryCard()}
-
             </div>
         )
     }
