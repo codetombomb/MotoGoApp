@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import BikeMapTwo from './BikeMapTwo'
-import PostCard from './PostCard'
 import Select from 'react-select'
 import axios from 'axios'
 
